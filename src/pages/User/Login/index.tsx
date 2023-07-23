@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
-import { userLoginUsingPOST } from '@/services/nero-api-backend/userController';
+import { userLoginUsingPOST } from '@/services/panda-api-backend/userController';
 import {
   AlipayCircleOutlined,
   LockOutlined,

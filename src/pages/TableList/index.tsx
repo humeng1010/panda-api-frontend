@@ -1,5 +1,5 @@
 import { addRule, removeRule, updateRule } from '@/services/ant-design-pro/api';
-import { listInterfaceInfoVOByPageUsingPOST } from '@/services/nero-api-backend/interfaceInfoController';
+import { listInterfaceInfoVOByPageUsingPOST } from '@/services/panda-api-backend/interfaceInfoController';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components';
 import {

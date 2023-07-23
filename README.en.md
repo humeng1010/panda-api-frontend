@@ -1,7 +1,7 @@
-# nero-api-frontend
+# panda-api-frontend
 
 #### Description
-Nero-API 接口开放平台前端代码仓库。
+panda-API 接口开放平台前端代码仓库。
 
 #### Software Architecture
 Software architecture description

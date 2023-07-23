@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer';
 import { Question, SelectLang } from '@/components/RightContent';
-import { getLoginUserUsingGET } from '@/services/nero-api-backend/userController';
+import { getLoginUserUsingGET } from '@/services/panda-api-backend/userController';
 import { LinkOutlined } from '@ant-design/icons';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
