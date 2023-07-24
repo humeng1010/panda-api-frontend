@@ -189,7 +189,7 @@ const TableList: React.FC = () => {
   return (
     <PageContainer>
       <ProTable<API.InterfaceInfoVO, API.PageParams>
-        headerTitle={'查询表格'}
+        headerTitle={'接口信息'}
         actionRef={actionRef}
         rowKey="key"
         search={{

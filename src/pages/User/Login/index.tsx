@@ -97,13 +97,16 @@ const Login: React.FC = () => {
         const defaultLoginSuccessMessage = '登录成功！';
         message.success(defaultLoginSuccessMessage);
         const urlParams = new URL(window.location.href).searchParams;
-        history.push(urlParams.get('redirect') || '/');
+        let redirect = urlParams.get('redirect');
+        console.log(redirect);
+        history.push(redirect || '/');
         // 如果失败去设置用户错误信息
         setInitialState({
           loginUser: res.data,
         });
         return;
       }
+      message.error(res.message)
     } catch (error) {
       const defaultLoginFailureMessage = '登录失败，请重试！';
       console.log(error);
