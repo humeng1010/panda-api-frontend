@@ -1,9 +1,9 @@
-import CreateModal from '@/pages/InterfaceInfo/components/CreateModal';
-import UpdateModal from '@/pages/InterfaceInfo/components/UpdateModal';
+import CreateModal from '@/pages/Admin/InterfaceInfo/components/CreateModal';
+import UpdateModal from '@/pages/Admin/InterfaceInfo/components/UpdateModal';
 import {
   addInterfaceInfoUsingPOST,
   deleteInterfaceInfoUsingPOST,
-  listInterfaceInfoVOByPageUsingPOST,
+  listInterfaceInfoVOByPageUsingPOST, offlineInterfaceInfoUsingPOST, onlineInterfaceInfoUsingPOST,
   updateInterfaceInfoUsingPOST,
 } from '@/services/panda-api-backend/interfaceInfoController';
 import { PlusOutlined } from '@ant-design/icons';
@@ -99,6 +99,50 @@ const TableList: React.FC = () => {
     } catch (error: any) {
       hide();
       message.error('删除失败：' + error.message);
+      return false;
+    }
+  };
+
+  /**
+   * 发布接口
+   * @param record
+   */
+  const handleOnline = async (record: API.IdRequest) => {
+    const hide = message.loading('发布中...');
+    if (!record) return true;
+    try {
+      await onlineInterfaceInfoUsingPOST({
+        id: record.id
+      });
+      hide();
+      message.success('发布成功');
+      actionRef.current?.reload();
+      return true;
+    } catch (error: any) {
+      hide();
+      message.error('发布失败：' + error.message);
+      return false;
+    }
+  };
+
+  /**
+   * 下线接口
+   * @param record
+   */
+  const handleOffline = async (record: API.IdRequest) => {
+    const hide = message.loading('关闭中...');
+    if (!record) return true;
+    try {
+      await offlineInterfaceInfoUsingPOST({
+        id: record.id
+      });
+      hide();
+      message.success('关闭成功');
+      actionRef.current?.reload();
+      return true;
+    } catch (error: any) {
+      hide();
+      message.error('关闭失败：' + error.message);
       return false;
     }
   };
@@ -219,7 +263,8 @@ const TableList: React.FC = () => {
       dataIndex: 'option',
       valueType: 'option',
       render: (_, record) => [
-        <a
+        <Button
+          type={"primary"}
           key="config"
           onClick={() => {
             handleUpdateModalOpen(true);
@@ -227,9 +272,11 @@ const TableList: React.FC = () => {
           }}
         >
           修改
-        </a>,
+        </Button>,
 
-        <a
+        <Button
+          type={"primary"}
+          danger
           key="config"
           onClick={() => {
             handleRemove(record);
@@ -237,7 +284,29 @@ const TableList: React.FC = () => {
           }}
         >
           删除
-        </a>,
+        </Button>,
+        record.status === 0 ? <Button
+          type={"primary"}
+          key="config"
+          onClick={() => {
+            handleOnline(record);
+            setCurrentRow(record);
+          }}
+        >
+          发布
+        </Button> : null,
+
+        record.status === 1 ?<Button
+          type={"primary"}
+          danger
+          key="config"
+          onClick={() => {
+            handleOffline(record);
+            setCurrentRow(record);
+          }}
+        >
+          下线
+        </Button> : null,
       ],
     },
   ];
