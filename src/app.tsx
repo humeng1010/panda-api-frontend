@@ -16,29 +16,20 @@ const loginPath = '/user/login';
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
  * */
 export async function getInitialState(): Promise<InitialState> {
-  const fetchUserInfo = async () => {
-    try {
-      const res = await getLoginUserUsingGET();
-      return res.data;
-    } catch (error) {
-      history.push(loginPath);
-    }
-    return undefined;
-  };
-  // 如果不是登录页面，执行
-  const { location } = history;
-  if (location.pathname !== loginPath) {
-    const loginUser = await getLoginUserUsingGET();
-    return {
-      fetchUserInfo,
-      loginUser: loginUser.data,
-      settings: defaultSettings as Partial<LayoutSettings>,
-    };
-  }
-  return {
-    fetchUserInfo,
+  // 当页面首次加载时，获取要全局保存的数据，比如用户登录信息
+  const state: InitialState = {
+    loginUser: undefined,
     settings: defaultSettings as Partial<LayoutSettings>,
-  };
+  }
+  try {
+    const res = await getLoginUserUsingGET();
+    if (res.data) {
+      state.loginUser = res.data;
+    }
+  } catch (error) {
+    history.push(loginPath);
+  }
+  return state;
 }
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout

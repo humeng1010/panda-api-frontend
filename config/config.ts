@@ -73,7 +73,7 @@ export default defineConfig({
    * @name layout 插件
    * @doc https://umijs.org/docs/max/layout-menu
    */
-  title: 'Ant Design Pro',
+  title: '胖达api接口开放平台',
   layout: {
     locale: true,
     ...defaultSettings,
@@ -146,4 +146,5 @@ export default defineConfig({
     strategy: 'normal',
   },
   requestRecord: {},
+  favicons: ['https://img.58tg.com/up/allimg/tx18/021720207805.jpg']
 });

@@ -32,7 +32,7 @@ const TableList: React.FC = () => {
   const [showDetail, setShowDetail] = useState<boolean>(false);
   const actionRef = useRef<ActionType>();
   const [currentRow, setCurrentRow] = useState<API.RuleListItem>();
-  const [selectedRowsState, setSelectedRows] = useState<API.RuleListItem[]>([]);
+  const [selectedRowsState, setSelectedRows] = useState<API.InterfaceInfoVO[]>([]);
 
   /**
    * @en-US Add node
@@ -208,7 +208,7 @@ const TableList: React.FC = () => {
     {
       title: '请求头',
       dataIndex: 'requestHeader',
-      valueType: 'textarea',
+      valueType: 'jsonCode',
       formItemProps: {
         rules: [
           {
@@ -219,9 +219,22 @@ const TableList: React.FC = () => {
       },
     },
     {
+      title: '请求参数',
+      dataIndex: 'requestParams',
+      valueType: 'jsonCode',
+      formItemProps: {
+        rules: [
+          {
+            required: true,
+            message: '请求参数',
+          },
+        ],
+      },
+    },
+    {
       title: '响应头',
       dataIndex: 'responseHeader',
-      valueType: 'textarea',
+      valueType: 'jsonCode',
       formItemProps: {
         rules: [
           {
@@ -265,6 +278,7 @@ const TableList: React.FC = () => {
       render: (_, record) => [
         <Button
           type={"primary"}
+          size={"small"}
           key="config"
           onClick={() => {
             handleUpdateModalOpen(true);
@@ -351,7 +365,7 @@ const TableList: React.FC = () => {
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {
-            setSelectedRows(selectedRows);
+            setSelectedRows([...selectedRows]);
           },
         }}
       />
@@ -369,7 +383,7 @@ const TableList: React.FC = () => {
               </a>{' '}
               项 &nbsp;&nbsp;
               <span>
-                服务调用次数总计 {selectedRowsState.reduce((pre, item) => pre + item.callNo!, 0)} 万
+                服务调用次数总计 {selectedRowsState.reduce((pre, item) => pre + item.id!, 0)} 万
               </span>
             </div>
           }
