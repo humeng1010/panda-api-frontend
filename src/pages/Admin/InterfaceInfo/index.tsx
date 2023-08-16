@@ -169,6 +169,7 @@ const TableList: React.FC = () => {
     {
       title: '描述',
       dataIndex: 'description',
+      hideInTable: true,
       valueType: 'textarea',
       formItemProps: {
         rules: [
@@ -209,6 +210,7 @@ const TableList: React.FC = () => {
       title: '请求头',
       dataIndex: 'requestHeader',
       valueType: 'jsonCode',
+      hideInTable: true,
       formItemProps: {
         rules: [
           {
@@ -235,6 +237,7 @@ const TableList: React.FC = () => {
       title: '响应头',
       dataIndex: 'responseHeader',
       valueType: 'jsonCode',
+      hideInTable: true,
       formItemProps: {
         rules: [
           {
@@ -290,6 +293,7 @@ const TableList: React.FC = () => {
 
         <Button
           type={"primary"}
+          size={"small"}
           danger
           key="config"
           onClick={() => {
@@ -301,6 +305,7 @@ const TableList: React.FC = () => {
         </Button>,
         record.status === 0 ? <Button
           type={"primary"}
+          size={"small"}
           key="config"
           onClick={() => {
             handleOnline(record);
@@ -312,6 +317,7 @@ const TableList: React.FC = () => {
 
         record.status === 1 ?<Button
           type={"primary"}
+          size={"small"}
           danger
           key="config"
           onClick={() => {
