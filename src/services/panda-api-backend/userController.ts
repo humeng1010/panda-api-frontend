@@ -112,21 +112,6 @@ export async function userLoginUsingPOST(
   });
 }
 
-/** userLoginByWxOpen GET /api/user/login/wx_open */
-export async function userLoginByWxOpenUsingGET(
-  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.userLoginByWxOpenUsingGETParams,
-  options?: { [key: string]: any },
-) {
-  return request<API.BaseResponseLoginUserVO>('/api/user/login/wx_open', {
-    method: 'GET',
-    params: {
-      ...params,
-    },
-    ...(options || {}),
-  });
-}
-
 /** userLogout POST /api/user/logout */
 export async function userLogoutUsingPOST(options?: { [key: string]: any }) {
   return request<API.BaseResponseboolean>('/api/user/logout', {

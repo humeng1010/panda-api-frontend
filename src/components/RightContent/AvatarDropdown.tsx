@@ -1,5 +1,5 @@
 import { userLogoutUsingPOST } from '@/services/panda-api-backend/userController';
-import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import {LockOutlined, LogoutOutlined, SettingOutlined, UserOutlined} from '@ant-design/icons';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { history, useModel } from '@umijs/max';
 import { Spin } from 'antd';
@@ -65,9 +65,12 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
           setInitialState((s: any) => ({ ...s, loginUser: undefined }));
         });
         loginOut();
+        history.push(`/account/${key}`);
         return;
       }
-      history.push(`/account/${key}`);
+      if (key === 'aksk'){
+        history.push('/secret')
+      }
     },
     [setInitialState],
   );
@@ -112,6 +115,11 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
           },
         ]
       : []),
+    {
+      key: 'aksk',
+      icon: <LockOutlined />,
+      label: '个人密钥',
+    },
     {
       key: 'logout',
       icon: <LogoutOutlined />,

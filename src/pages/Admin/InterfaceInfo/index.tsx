@@ -369,11 +369,7 @@ const TableList: React.FC = () => {
           }
         }}
         columns={columns}
-        rowSelection={{
-          onChange: (_, selectedRows) => {
-            setSelectedRows([...selectedRows]);
-          },
-        }}
+
       />
       {selectedRowsState?.length > 0 && (
         <FooterToolbar

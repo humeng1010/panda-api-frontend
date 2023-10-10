@@ -5,15 +5,15 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponseint = {
-    code?: number;
-    data?: number;
-    message?: string;
-  };
-
   type BaseResponseInterfaceInfoVO = {
     code?: number;
     data?: InterfaceInfoVO;
+    message?: string;
+  };
+
+  type BaseResponseListInterfaceInvokeInfo = {
+    code?: number;
+    data?: InterfaceInvokeInfo[];
     message?: string;
   };
 
@@ -41,12 +41,6 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponsePagePostVO = {
-    code?: number;
-    data?: PagePostVO;
-    message?: string;
-  };
-
   type BaseResponsePageUser = {
     code?: number;
     data?: PageUser;
@@ -56,12 +50,6 @@ declare namespace API {
   type BaseResponsePageUserVO = {
     code?: number;
     data?: PageUserVO;
-    message?: string;
-  };
-
-  type BaseResponsePostVO = {
-    code?: number;
-    data?: PostVO;
     message?: string;
   };
 
@@ -83,17 +71,6 @@ declare namespace API {
     message?: string;
   };
 
-  type checkUsingGETParams = {
-    /** timestamp */
-    timestamp?: string;
-    /** nonce */
-    nonce?: string;
-    /** signature */
-    signature?: string;
-    /** echostr */
-    echostr?: string;
-  };
-
   type DeleteRequest = {
     id?: number;
   };
@@ -101,11 +78,6 @@ declare namespace API {
   type getInterfaceInfoVOByIdUsingGETParams = {
     /** id */
     id: number;
-  };
-
-  type getPostVOByIdUsingGETParams = {
-    /** id */
-    id?: number;
   };
 
   type getUserByIdUsingGETParams = {
@@ -181,6 +153,15 @@ declare namespace API {
     userId?: number;
   };
 
+  type InterfaceInvokeInfo = {
+    id?: number;
+    method?: string;
+    name?: string;
+    status?: number;
+    totalNum?: number;
+    url?: string;
+  };
+
   type LoginUserVO = {
     createTime?: string;
     id?: number;
@@ -204,19 +185,6 @@ declare namespace API {
     orders?: OrderItem[];
     pages?: number;
     records?: InterfaceInfoVO[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type PagePostVO = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
-    records?: PostVO[];
     searchCount?: boolean;
     size?: number;
     total?: number;
@@ -248,74 +216,6 @@ declare namespace API {
     total?: number;
   };
 
-  type PostAddRequest = {
-    content?: string;
-    tags?: string[];
-    title?: string;
-  };
-
-  type PostEditRequest = {
-    content?: string;
-    id?: number;
-    tags?: string[];
-    title?: string;
-  };
-
-  type PostFavourAddRequest = {
-    postId?: number;
-  };
-
-  type PostFavourQueryRequest = {
-    current?: number;
-    pageSize?: number;
-    postQueryRequest?: PostQueryRequest;
-    sortField?: string;
-    sortOrder?: string;
-    userId?: number;
-  };
-
-  type PostQueryRequest = {
-    content?: string;
-    current?: number;
-    favourUserId?: number;
-    id?: number;
-    notId?: number;
-    orTags?: string[];
-    pageSize?: number;
-    searchText?: string;
-    sortField?: string;
-    sortOrder?: string;
-    tags?: string[];
-    title?: string;
-    userId?: number;
-  };
-
-  type PostThumbAddRequest = {
-    postId?: number;
-  };
-
-  type PostUpdateRequest = {
-    content?: string;
-    id?: number;
-    tags?: string[];
-    title?: string;
-  };
-
-  type PostVO = {
-    content?: string;
-    createTime?: string;
-    favourNum?: number;
-    hasFavour?: boolean;
-    hasThumb?: boolean;
-    id?: number;
-    tagList?: string[];
-    thumbNum?: number;
-    title?: string;
-    updateTime?: string;
-    user?: UserVO;
-    userId?: number;
-  };
-
   type uploadFileUsingPOSTParams = {
     biz?: string;
   };
@@ -344,9 +244,18 @@ declare namespace API {
     userRole?: string;
   };
 
-  type userLoginByWxOpenUsingGETParams = {
-    /** code */
-    code: string;
+  type UserInterfaceInfoAddRequest = {
+    interfaceInfoId?: number;
+    leftNum?: number;
+    totalNum?: number;
+    userId?: number;
+  };
+
+  type UserInterfaceInfoUpdateRequest = {
+    id?: number;
+    leftNum?: number;
+    status?: number;
+    totalNum?: number;
   };
 
   type UserLoginRequest = {
