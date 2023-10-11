@@ -135,6 +135,22 @@ export async function userRegisterUsingPOST(
   });
 }
 
+/** showCurrentUserSecret GET /api/user/secret/show */
+export async function showCurrentUserSecretUsingGET(options?: { [key: string]: any }) {
+  return request<API.BaseResponseUserSecretVO>('/api/user/secret/show', {
+    method: 'GET',
+    ...(options || {}),
+  });
+}
+
+/** updateCurrentUserSecret PUT /api/user/secret/update */
+export async function updateCurrentUserSecretUsingPUT(options?: { [key: string]: any }) {
+  return request<API.BaseResponseboolean>('/api/user/secret/update', {
+    method: 'PUT',
+    ...(options || {}),
+  });
+}
+
 /** updateUser POST /api/user/update */
 export async function updateUserUsingPOST(
   body: API.UserUpdateRequest,

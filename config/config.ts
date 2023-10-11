@@ -146,5 +146,5 @@ export default defineConfig({
     strategy: 'normal',
   },
   requestRecord: {},
-  favicons: ['https://img.58tg.com/up/allimg/tx18/021720207805.jpg']
+  favicons: ['/favicon.ico']
 });

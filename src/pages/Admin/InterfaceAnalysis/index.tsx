@@ -6,8 +6,9 @@ import React, { useEffect, useState } from 'react';
 
 const InterfaceAnalysis: React.FC = () => {
   const [data, setData] = useState<API.InterfaceInvokeInfo[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true)
     //  从远程获取数据
     try {
       listTopInvokeInterfaceInfoUsingGET().then((res) => {
@@ -16,6 +17,7 @@ const InterfaceAnalysis: React.FC = () => {
         }
       });
     } catch (e: any) {}
+    setLoading(false)
   }, []);
   //映射Data
   const chartData = data.map(item=>{

@@ -8,19 +8,14 @@ const Settings: ProLayoutProps & {
   logo?: string;
 } = {
   navTheme: 'light',
-  // 拂晓蓝
-  colorPrimary: '#1890ff',
-
-
-  layout: "mix",
-
-  contentWidth: 'Fluid',
-  // fixedHeader: false,
+  colorPrimary: "#52C41A",
+  layout: "top",
+  contentWidth: 'Fixed',
   fixSiderbar: true,
   colorWeak: false,
   title: '胖达api',
   pwa: true,
-  logo: 'https://img.58tg.com/up/allimg/tx18/021720207805.jpg',
+  logo: '/favicon.ico',
   iconfontUrl: '',
   token: {
     // 参见ts声明，demo 见文档，通过token 修改样式

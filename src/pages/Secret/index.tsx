@@ -1,27 +1,28 @@
+import {
+  showCurrentUserSecretUsingGET,
+  updateCurrentUserSecretUsingPUT
+} from '@/services/panda-api-backend/userController';
 import { PageContainer } from '@ant-design/pro-components';
+import {Button, Card, Input, message, Typography, Modal, Space} from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import {Button, Card, message, Typography} from 'antd';
-import { listInterfaceInfoVOByPageUsingPOST } from '@/services/panda-api-backend/interfaceInfoController';
 
-const { Paragraph,Text } = Typography;
+const { Paragraph, Text } = Typography;
+const { confirm } = Modal;
 /**
  * 主页
  * @constructor
  */
 const Secret: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const [list, setList] = useState<API.InterfaceInfoVO[]>([]);
-  const [total, setTotal] = useState<number>(0);
+  const [secret, setSecret] = useState<API.UserSecretVO>();
+  const [passwordVisible, setPasswordVisible] = React.useState(false);
 
-  const loadData = async (current = 1, pageSize = 5) => {
+  const loadData = async () => {
     setLoading(true);
     try {
-      const res = await listInterfaceInfoVOByPageUsingPOST({
-        current,
-        pageSize,
-      });
-      setList(res?.data?.records ?? []);
-      setTotal(res?.data?.total ?? 0);
+      const res = await showCurrentUserSecretUsingGET();
+      setSecret(res.data);
     } catch (error: any) {
       message.error('请求失败，' + error.message);
     }
@@ -32,29 +33,65 @@ const Secret: React.FC = () => {
     loadData();
   }, []);
 
+
+
+  const updateUserSecret = ()=>{
+    updateCurrentUserSecretUsingPUT().then(res=>{
+      if (!res.data){
+        message.error('修改失败，' + res.message);
+        return
+      }
+      message.success("修改个人密钥成功")
+      loadData()
+    })
+  }
+
+  const showConfirm = () => {
+    confirm({
+      title: '警告',
+      icon: <ExclamationCircleOutlined />,
+      content: '确认需要更换您的密钥吗?更新后别忘记在项目中修改哦~',
+      onOk() {
+        updateUserSecret()
+      },
+      onCancel() {
+      },
+    });
+  }
   return (
     <PageContainer title="个人密钥管理">
-      <Card title="密钥">
+      <Card title="密钥" loading={loading}>
         <Card type="inner" title="accessKey">
           <Paragraph copyable code>
-            panda
+            {secret?.accessKey}
           </Paragraph>
         </Card>
         <Card
           style={{ marginTop: 16 }}
           type="inner"
-          title={<p>
-            <span>secretKey</span>
-            <br/>
-            <Text type="danger" code>
-              个人密钥请妥善保管，若泄漏请及时更换！
-            </Text>
-        </p>}
-          extra={<Button danger>更换</Button>}
+          title={
+            <p>
+                <span>secretKey</span>
+                <br />
+              <Space>
+
+              <Text type="danger" code>
+                  个人密钥请妥善保管，若泄漏请及时更换！
+                </Text>
+                <Button type={"primary"} style={{ width: 80 }} onClick={() => setPasswordVisible(prevState => !prevState)}>
+                  {passwordVisible ? '隐藏' : '显示'}
+                </Button>
+                <Button onClick={showConfirm} type={"primary"} danger>更换</Button>
+              </Space>
+            </p>
+          }
         >
-          <Paragraph copyable code>
-            12345678
-          </Paragraph>
+          <Input.Password
+            value={secret?.secretKey}
+            disabled
+            visibilityToggle={{ visible: passwordVisible, onVisibleChange: setPasswordVisible }}
+          />
+
         </Card>
       </Card>
     </PageContainer>

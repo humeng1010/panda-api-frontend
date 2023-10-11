@@ -99,7 +99,7 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={<img alt="logo" src="https://img.58tg.com/up/allimg/tx18/021720207805.jpg" />}
+          logo={<img alt="logo" src="/favicon.ico" />}
           title="胖达api接口在线平台-登录"
           subTitle={'胖达api接口在线平台'}
           initialValues={{

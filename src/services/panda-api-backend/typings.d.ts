@@ -65,6 +65,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponseUserSecretVO = {
+    code?: number;
+    data?: UserSecretVO;
+    message?: string;
+  };
+
   type BaseResponseUserVO = {
     code?: number;
     data?: UserVO;
@@ -280,6 +286,11 @@ declare namespace API {
     checkPassword?: string;
     userAccount?: string;
     userPassword?: string;
+  };
+
+  type UserSecretVO = {
+    accessKey?: string;
+    secretKey?: string;
   };
 
   type UserUpdateMyRequest = {
