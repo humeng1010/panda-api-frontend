@@ -65,6 +65,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponseUserInterfaceInfoLeftCountVO = {
+    code?: number;
+    data?: UserInterfaceInfoLeftCountVO;
+    message?: string;
+  };
+
   type BaseResponseUserSecretVO = {
     code?: number;
     data?: UserSecretVO;
@@ -81,9 +87,26 @@ declare namespace API {
     id?: number;
   };
 
+  type getCurrentUserInterfaceInfoLeftCountUsingGETParams = {
+    /** id */
+    id: number;
+  };
+
+  type getInterfaceInfoByUrlAndMethodUsingGETParams = {
+    /** path */
+    path: string;
+    /** method */
+    method: string;
+  };
+
   type getInterfaceInfoVOByIdUsingGETParams = {
     /** id */
     id: number;
+  };
+
+  type getInvokeUserUsingGETParams = {
+    /** accessKey */
+    accessKey: string;
   };
 
   type getUserByIdUsingGETParams = {
@@ -98,6 +121,22 @@ declare namespace API {
 
   type IdRequest = {
     id?: number;
+  };
+
+  type InterfaceInfo = {
+    createTime?: string;
+    description?: string;
+    id?: number;
+    isDelete?: number;
+    method?: string;
+    name?: string;
+    requestHeader?: string;
+    requestParams?: string;
+    responseHeader?: string;
+    status?: number;
+    updateTime?: string;
+    url?: string;
+    userId?: number;
   };
 
   type InterfaceInfoAddRequest = {
@@ -168,10 +207,16 @@ declare namespace API {
     url?: string;
   };
 
+  type InvokeCountRequest = {
+    interfaceInfoId?: number;
+    userId?: number;
+  };
+
   type LoginUserVO = {
     createTime?: string;
     id?: number;
     updateTime?: string;
+    userAccount?: string;
     userAvatar?: string;
     userName?: string;
     userProfile?: string;
@@ -255,6 +300,11 @@ declare namespace API {
     leftNum?: number;
     totalNum?: number;
     userId?: number;
+  };
+
+  type UserInterfaceInfoLeftCountVO = {
+    leftNum?: number;
+    totalNum?: number;
   };
 
   type UserInterfaceInfoUpdateRequest = {

@@ -1,7 +1,4 @@
 export default [
-  { path: '/', name: '主页', icon: 'smile', component: './Index' },
-  { path: '/secret', name: '个人密钥', icon: 'lock', component: './Secret' },
-  { path: '/interface_info/:id', name: '查看接口', component: './InterfaceInfo', hideInMenu:true},
   {
     path: '/user',
     layout: false,
@@ -9,6 +6,34 @@ export default [
       { name: '登录', path: '/user/login', component: './User/Login' },
     ],
   },
+  { path: '/', name: '主页', icon: 'smile', component: './Index' },
+  { path: '/interface_info/:id', name: '查看接口', component: './InterfaceInfo', hideInMenu:true},
+  {
+    path: '/account',
+    name: '个人中心',
+    icon: 'user',
+    routes: [
+      {
+        name: '个人中心',
+        path: '/account/accountcenter',
+        component: './Account/AccountCenter',
+      },
+      {
+        name: '个人设置',
+        path: '/account/accountsettings',
+        component: './Account/AccountSettings',
+      },
+      {
+        name:'密钥管理',
+        path: '/account/secret',
+        component: './Account/Secret',
+      },
+      {
+        component: './404',
+      },
+    ],
+  },
+
   {
     path: '/admin',
     name: '管理页',
@@ -19,5 +44,6 @@ export default [
       { name: '接口分析', icon: 'analysis', path: '/admin/interface_analysis', component: './Admin/InterfaceAnalysis' },
     ],
   },
+  { path: '/usesdk', name: '接口使用说明', icon: 'code', component: './UseSdk' },
   { path: '*', layout: false, component: './404' },
 ];

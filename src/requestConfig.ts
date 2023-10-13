@@ -43,7 +43,8 @@ export const requestConfig: RequestConfig = {
       // 拦截响应数据，进行个性化处理
       const { data } = response as unknown as ResponseStructure;
       if (data.code!==0){
-        throw new Error(data.message)
+        message.error(data.message)
+        // throw new Error(data.message)
       }
 
       if (data?.success === false) {

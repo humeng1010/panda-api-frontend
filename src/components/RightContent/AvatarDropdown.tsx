@@ -1,14 +1,20 @@
 import { userLogoutUsingPOST } from '@/services/panda-api-backend/userController';
-import {LockOutlined, LogoutOutlined, SettingOutlined, UserOutlined} from '@ant-design/icons';
+import {
+  ExclamationCircleOutlined,
+  LockOutlined,
+  LogoutOutlined,
+  PayCircleOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { history, useModel } from '@umijs/max';
-import { Spin } from 'antd';
-import { stringify } from 'querystring';
+import { Modal, Spin } from 'antd';
 import type { MenuInfo } from 'rc-menu/lib/interface';
 import React, { useCallback } from 'react';
-import { flushSync } from 'react-dom';
 import HeaderDropdown from '../HeaderDropdown';
+import {flushSync} from "react-dom";
 
+const { confirm } = Modal;
 export type GlobalHeaderRightProps = {
   menu?: boolean;
   children?: React.ReactNode;
@@ -20,23 +26,15 @@ export const AvatarName = () => {
   return <span className="anticon">{loginUser?.userName}</span>;
 };
 
-export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, children }) => {
+export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ children }) => {
   /**
    * 退出登录，并且将当前的 url 保存
    */
   const loginOut = async () => {
     await userLogoutUsingPOST();
-    const { search, pathname } = window.location;
-    const urlParams = new URL(window.location.href).searchParams;
-    /** 此方法会跳转到 redirect 参数所在的位置 */
-    const redirect = urlParams.get('redirect');
-    // Note: There may be security issues, please note
-    if (window.location.pathname !== '/user/login' && !redirect) {
+    if (window.location.pathname !== '/user/login') {
       history.replace({
         pathname: '/user/login',
-        search: stringify({
-          redirect: pathname + search,
-        }),
       });
     }
   };
@@ -61,15 +59,27 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
     (event: MenuInfo) => {
       const { key } = event;
       if (key === 'logout') {
-        flushSync(() => {
-          setInitialState((s: any) => ({ ...s, loginUser: undefined }));
+        confirm({
+          title: '提示',
+          icon: <ExclamationCircleOutlined />,
+          content: '确定要退出吗？',
+          onOk() {
+            flushSync(() => {
+              setInitialState((s: any) => ({ ...s, loginUser: undefined }));
+            });
+            loginOut();
+            history.push(`/account/${key}`);
+            return;
+          },
+          onCancel() {
+          },
         });
-        loginOut();
-        history.push(`/account/${key}`);
-        return;
       }
-      if (key === 'aksk'){
-        history.push('/secret')
+      if (key === 'aksk') {
+        history.push('/secret');
+      }
+      if (key === 'me') {
+        history.push('/me');
       }
     },
     [setInitialState],
@@ -98,23 +108,16 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
   }
 
   const menuItems = [
-    ...(menu
-      ? [
-          {
-            key: 'center',
-            icon: <UserOutlined />,
-            label: '个人中心',
-          },
-          {
-            key: 'settings',
-            icon: <SettingOutlined />,
-            label: '个人设置',
-          },
-          {
-            type: 'divider' as const,
-          },
-        ]
-      : []),
+    {
+      key: 'me',
+      icon: <UserOutlined />,
+      label: '个人中心',
+    },
+    {
+      key: 'vip',
+      icon: <PayCircleOutlined />,
+      label: '开通会员',
+    },
     {
       key: 'aksk',
       icon: <LockOutlined />,

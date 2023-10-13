@@ -19,24 +19,18 @@ import { Button, Drawer, message } from 'antd';
 import React, { useRef, useState } from 'react';
 
 const TableList: React.FC = () => {
-  /**
-   * @en-US Pop-up window of new window
-   * @zh-CN 新建窗口的弹窗
-   *  */
+
   const [createModalOpen, handleModalOpen] = useState<boolean>(false);
-  /**
-   * @en-US The pop-up window of the distribution update window
-   * @zh-CN 分布更新窗口的弹窗
-   * */
+
   const [updateModalOpen, handleUpdateModalOpen] = useState<boolean>(false);
   const [showDetail, setShowDetail] = useState<boolean>(false);
   const actionRef = useRef<ActionType>();
   const [currentRow, setCurrentRow] = useState<API.RuleListItem>();
   const [selectedRowsState, setSelectedRows] = useState<API.InterfaceInfoVO[]>([]);
+  const [loading,setLoading] = useState(false);
 
   /**
-   * @en-US Add node
-   * @zh-CN 添加节点
+   * 处理新建方法
    * @param fields
    */
   const handleAdd = async (fields: API.InterfaceInfoVO) => {
@@ -334,6 +328,7 @@ const TableList: React.FC = () => {
     <PageContainer>
       <ProTable<API.InterfaceInfoVO, API.PageParams>
         headerTitle={'接口信息'}
+        loading={loading}
         actionRef={actionRef}
         rowKey="key"
         search={{
@@ -351,10 +346,12 @@ const TableList: React.FC = () => {
           </Button>,
         ]}
         request={async (params) => {
+          setLoading(true)
           const res = await listInterfaceInfoVOByPageUsingPOST({
             ...params,
           });
           if (res?.data) {
+            setLoading(false)
             return {
               data: res?.data.records || [],
               success: true,

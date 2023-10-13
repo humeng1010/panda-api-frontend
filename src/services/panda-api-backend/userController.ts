@@ -67,6 +67,21 @@ export async function getUserVOByIdUsingGET(
   });
 }
 
+/** getInvokeUser GET /api/user/getInvokeUser */
+export async function getInvokeUserUsingGET(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.getInvokeUserUsingGETParams,
+  options?: { [key: string]: any },
+) {
+  return request<API.User>('/api/user/getInvokeUser', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
 /** listUserByPage POST /api/user/list/page */
 export async function listUserByPageUsingPOST(
   body: API.UserQueryRequest,

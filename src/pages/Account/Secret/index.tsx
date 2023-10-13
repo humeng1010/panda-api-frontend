@@ -2,8 +2,8 @@ import {
   showCurrentUserSecretUsingGET,
   updateCurrentUserSecretUsingPUT
 } from '@/services/panda-api-backend/userController';
-import { PageContainer } from '@ant-design/pro-components';
-import {Button, Card, Input, message, Typography, Modal, Space} from 'antd';
+import {PageContainer, ProField} from '@ant-design/pro-components';
+import {Button, Card, Input, message, Typography, Modal, Space,Descriptions} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 
@@ -78,19 +78,19 @@ const Secret: React.FC = () => {
               <Text type="danger" code>
                   个人密钥请妥善保管，若泄漏请及时更换！
                 </Text>
-                <Button type={"primary"} style={{ width: 80 }} onClick={() => setPasswordVisible(prevState => !prevState)}>
-                  {passwordVisible ? '隐藏' : '显示'}
-                </Button>
                 <Button onClick={showConfirm} type={"primary"} danger>更换</Button>
               </Space>
             </p>
           }
         >
-          <Input.Password
-            value={secret?.secretKey}
-            disabled
-            visibilityToggle={{ visible: passwordVisible, onVisibleChange: setPasswordVisible }}
-          />
+          <Descriptions.Item label="密码">
+            <ProField
+              text={secret?.secretKey}
+              valueType="password"
+              mode={"read"}
+            />
+          </Descriptions.Item>
+
 
         </Card>
       </Card>

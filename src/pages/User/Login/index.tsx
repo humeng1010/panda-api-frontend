@@ -39,13 +39,12 @@ const Login: React.FC = () => {
           ...values,
         });
         if (res.data) {
-          const urlParams = new URL(window.location.href).searchParams;
           setInitialState({
             loginUser: res.data
           });
           setTimeout(()=>{
             message.success("登录成功")
-            history.push(urlParams.get('redirect') || '/');
+            history.push('/');
           },100)
           return;
         }

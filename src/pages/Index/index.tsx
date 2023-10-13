@@ -12,7 +12,7 @@ const Index: React.FC = () => {
   const [list, setList] = useState<API.InterfaceInfoVO[]>([]);
   const [total, setTotal] = useState<number>(0);
 
-  const loadData = async (current = 1, pageSize = 5) => {
+  const loadData = async (current = 1, pageSize = 10) => {
     setLoading(true);
     try {
       const res = await listInterfaceInfoVOByPageUsingPOST({
@@ -32,7 +32,7 @@ const Index: React.FC = () => {
   }, []);
 
   return (
-    <PageContainer title="在线接口开放平台">
+    <PageContainer title="在线接口开放平台" loading={loading}>
       <List
         className="my-list"
         loading={loading}
@@ -50,12 +50,11 @@ const Index: React.FC = () => {
           );
         }}
         pagination={{
-          // eslint-disable-next-line @typescript-eslint/no-shadow
           showTotal(total: number) {
             return '总数：' + total;
           },
           align:"center",
-          pageSize: 5,
+          pageSize: 10,
           total,
           onChange(page, pageSize) {
             loadData(page, pageSize);
