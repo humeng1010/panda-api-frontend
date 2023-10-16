@@ -4,7 +4,7 @@ import {
 } from '@ant-design/pro-components';
 import '@umijs/max';
 import { Modal } from 'antd';
-import React, {useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 export type FormValueType = {
   target?: string;
   template?: string;
@@ -21,22 +21,22 @@ export type Props = {
   visible: boolean;
 };
 const UpdateModal: React.FC<Props> = (props) => {
-  const {values,columns,visible,onCancel,onSubmit} = props
+  const { values, columns, visible, onCancel, onSubmit } = props
 
   const formRef = useRef<ProFormInstance>();
 
-  useEffect(()=>{
+  useEffect(() => {
     formRef.current?.setFieldsValue(values)
-  },[values])
+  }, [values])
 
   return (
-    <Modal open={visible} onCancel={()=>onCancel?.()} footer={null}>
+    <Modal open={visible} onCancel={() => onCancel?.()} footer={null}>
       {/*// @ts-ignore*/}
       <ProTable type={"form"} columns={columns}
-                formRef={formRef}
-                onSubmit={async (value)=>{
-        onSubmit?.(value);
-      }}/>
+        formRef={formRef}
+        onSubmit={async (value) => {
+          onSubmit?.(value);
+        }} />
     </Modal>
 
   );

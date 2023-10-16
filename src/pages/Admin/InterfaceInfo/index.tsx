@@ -27,7 +27,7 @@ const TableList: React.FC = () => {
   const actionRef = useRef<ActionType>();
   const [currentRow, setCurrentRow] = useState<API.RuleListItem>();
   const [selectedRowsState, setSelectedRows] = useState<API.InterfaceInfoVO[]>([]);
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   /**
    * 处理新建方法
@@ -309,7 +309,7 @@ const TableList: React.FC = () => {
           发布
         </Button> : null,
 
-        record.status === 1 ?<Button
+        record.status === 1 ? <Button
           type={"primary"}
           size={"small"}
           danger
@@ -405,8 +405,8 @@ const TableList: React.FC = () => {
         onCancel={() => {
           handleModalOpen(false);
         }}
-        onSubmit={ async (values) => {
-         const success = await handleAdd(values);
+        onSubmit={async (values) => {
+          const success = await handleAdd(values);
           if (success) {
             handleModalOpen(false)
             setCurrentRow(undefined);

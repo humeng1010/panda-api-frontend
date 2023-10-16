@@ -12,15 +12,15 @@ const InterfaceAnalysis: React.FC = () => {
     //  从远程获取数据
     try {
       listTopInvokeInterfaceInfoUsingGET().then((res) => {
-        if (res.data){
+        if (res.data) {
           setData(res.data);
         }
       });
-    } catch (e: any) {}
+    } catch (e: any) { }
     setLoading(false)
   }, []);
   //映射Data
-  const chartData = data.map(item=>{
+  const chartData = data.map(item => {
     return {
       value: item.totalNum,
       name: item.name

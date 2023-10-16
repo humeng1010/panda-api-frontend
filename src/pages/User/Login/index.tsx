@@ -1,5 +1,5 @@
 import Footer from '@/components/Footer';
-import {userLoginUsingPOST, userRegisterUsingPOST} from '@/services/panda-api-backend/userController';
+import { userLoginUsingPOST, userRegisterUsingPOST } from '@/services/panda-api-backend/userController';
 import {
   LockOutlined,
   UserOutlined,
@@ -11,7 +11,7 @@ import {
 } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { Helmet, history, useModel } from '@umijs/max';
-import { message, Tabs} from 'antd';
+import { message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import Settings from '../../../../config/defaultSettings';
 
@@ -32,7 +32,7 @@ const Login: React.FC = () => {
 
 
   const handleSubmit = async (values: API.UserLoginRequest | API.UserRegisterRequest) => {
-    if (type==="login"){
+    if (type === "login") {
       try {
         // 登录
         const res = await userLoginUsingPOST({
@@ -42,10 +42,10 @@ const Login: React.FC = () => {
           setInitialState({
             loginUser: res.data
           });
-          setTimeout(()=>{
+          setTimeout(() => {
             message.success("登录成功")
             history.push('/');
-          },100)
+          }, 100)
           return;
         }
       } catch (error) {
@@ -53,9 +53,9 @@ const Login: React.FC = () => {
         console.log(error);
         message.error(defaultLoginFailureMessage);
       }
-    }else if (type === "register"){
+    } else if (type === "register") {
       // 校验密码
-      const {userPassword, checkPassword} = values as API.UserRegisterRequest
+      const { userPassword, checkPassword } = values as API.UserRegisterRequest
       if (userPassword !== checkPassword) {
         message.error("两次输入的密码不一致");
         return
@@ -93,7 +93,7 @@ const Login: React.FC = () => {
         }}
       >
         <LoginForm
-          submitter={{searchConfig: {submitText: type==="login"?'登录':'注册'}}}
+          submitter={{ searchConfig: { submitText: type === "login" ? '登录' : '注册' } }}
           contentStyle={{
             minWidth: 280,
             maxWidth: '75vw',

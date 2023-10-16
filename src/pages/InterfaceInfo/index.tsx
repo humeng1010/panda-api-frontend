@@ -53,7 +53,7 @@ const Index: React.FC = () => {
     loadData();
   }, []);
 
-  const [image,setImage] = useState("");
+  const [image, setImage] = useState("");
   const onFinish = async (values: any) => {
     if (!params.id) {
       message.error('接口不存在');
@@ -68,7 +68,7 @@ const Index: React.FC = () => {
 
       setInvokeRes(res.data);
       // 处理随机图片显示
-      if (data?.responseHeader==='image'){
+      if (data?.responseHeader === 'image') {
         setImage(JSON.parse(res?.data as any).data)
       }
       message.success('请求成功');

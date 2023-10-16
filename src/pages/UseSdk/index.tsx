@@ -1,5 +1,5 @@
 import { PageContainer } from '@ant-design/pro-components';
-import {  Typography } from 'antd';
+import { Typography } from 'antd';
 import React from 'react';
 
 const { Title, Paragraph, Text } = Typography;
@@ -46,9 +46,9 @@ const Index: React.FC = () => {
           <Paragraph>
             在application.yml中配置自己的ak、sk，如下：
             panda:
-              client:
-                access-key: xxx
-                secret-key: xxx
+            client:
+            access-key: xxx
+            secret-key: xxx
             之后就可以在项目中使用<Text mark>PanApiClient</Text>调用接口
           </Paragraph>
 

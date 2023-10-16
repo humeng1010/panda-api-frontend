@@ -2,8 +2,8 @@ import {
   showCurrentUserSecretUsingGET,
   updateCurrentUserSecretUsingPUT
 } from '@/services/panda-api-backend/userController';
-import {PageContainer, ProField} from '@ant-design/pro-components';
-import {Button, Card, Input, message, Typography, Modal, Space,Descriptions} from 'antd';
+import { PageContainer, ProField } from '@ant-design/pro-components';
+import { Button, Card, Input, message, Typography, Modal, Space, Descriptions } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 
@@ -35,9 +35,9 @@ const Secret: React.FC = () => {
 
 
 
-  const updateUserSecret = ()=>{
-    updateCurrentUserSecretUsingPUT().then(res=>{
-      if (!res.data){
+  const updateUserSecret = () => {
+    updateCurrentUserSecretUsingPUT().then(res => {
+      if (!res.data) {
         message.error('修改失败，' + res.message);
         return
       }
@@ -71,11 +71,11 @@ const Secret: React.FC = () => {
           type="inner"
           title={
             <p>
-                <span>secretKey</span>
-                <br />
+              <span>secretKey</span>
+              <br />
               <Space>
 
-              <Text type="danger" code>
+                <Text type="danger" code>
                   个人密钥请妥善保管，若泄漏请及时更换！
                 </Text>
                 <Button onClick={showConfirm} type={"primary"} danger>更换</Button>

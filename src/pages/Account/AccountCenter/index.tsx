@@ -132,10 +132,10 @@ const AccountCenter: React.FC = () => {
                   {userInfo?.userRole === 'user'
                     ? '普通用户'
                     : userInfo?.userRole === 'admin'
-                    ? '管理员'
-                    : userInfo?.userRole === 'vip'
-                    ? '会员用户'
-                    : '未知'}
+                      ? '管理员'
+                      : userInfo?.userRole === 'vip'
+                        ? '会员用户'
+                        : '未知'}
                 </p>
                 <p>
                   <ClockCircleOutlined

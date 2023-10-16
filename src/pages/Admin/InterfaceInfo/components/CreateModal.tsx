@@ -20,13 +20,13 @@ export type Props = {
   visible: boolean;
 };
 const CreateModal: React.FC<Props> = (props) => {
-  const {columns,visible,onCancel,onSubmit} = props
+  const { columns, visible, onCancel, onSubmit } = props
   return (
-    <Modal open={visible} onCancel={()=>onCancel?.()} footer={null}>
+    <Modal open={visible} onCancel={() => onCancel?.()} footer={null}>
       {/*// @ts-ignore*/}
-      <ProTable type={"form"} columns={columns} onSubmit={async (value)=>{
+      <ProTable type={"form"} columns={columns} onSubmit={async (value) => {
         onSubmit?.(value);
-      }}/>
+      }} />
     </Modal>
 
   );

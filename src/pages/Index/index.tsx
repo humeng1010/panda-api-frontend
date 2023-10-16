@@ -53,7 +53,7 @@ const Index: React.FC = () => {
           showTotal(total: number) {
             return '总数：' + total;
           },
-          align:"center",
+          align: "center",
           pageSize: 10,
           total,
           onChange(page, pageSize) {
