@@ -17,6 +17,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponseListUserInterfaceInvokeInfo = {
+    code?: number;
+    data?: UserInterfaceInvokeInfo[];
+    message?: string;
+  };
+
   type BaseResponseLoginUserVO = {
     code?: number;
     data?: LoginUserVO;
@@ -311,6 +317,11 @@ declare namespace API {
     id?: number;
     leftNum?: number;
     status?: number;
+    totalNum?: number;
+  };
+
+  type UserInterfaceInvokeInfo = {
+    name?: string;
     totalNum?: number;
   };
 

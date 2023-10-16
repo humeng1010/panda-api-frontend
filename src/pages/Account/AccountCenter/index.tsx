@@ -1,4 +1,5 @@
 import { getLoginUserUsingGET } from '@/services/panda-api-backend/userController';
+import { getCurrentUserInterfaceInfoLeftCountStatisticsUsingGET } from '@/services/panda-api-backend/userInterfaceInfoController';
 import {
   AntDesignOutlined,
   ClockCircleOutlined,
@@ -14,6 +15,7 @@ import React, { useEffect, useState } from 'react';
 
 const AccountCenter: React.FC = () => {
   const [userInfo, setUserInfo] = useState<API.LoginUserVO>();
+  const [statisticsData, setStatisticsData] = useState<API.UserInterfaceInvokeInfo[]>();
   const [loading, setLoading] = useState(false);
   const [loadingCharts, setloadingCharts] = useState(false);
 
@@ -27,25 +29,29 @@ const AccountCenter: React.FC = () => {
       message.error('网络错误');
     }
   };
+  const getUserInfoInvokeStatistics = async () => {
+    setloadingCharts(true);
+    try {
+      const res = await getCurrentUserInterfaceInfoLeftCountStatisticsUsingGET();
+      setStatisticsData(res.data);
+      setloadingCharts(false);
+    } catch (e) {
+      message.error('网络错误');
+    }
+  };
+
+  const mapStatisticsData2Source = statisticsData?.map(item => [item.name, item.totalNum]) || []
+
   useEffect(() => {
     getUserInfoData();
+    getUserInfoInvokeStatistics();
   }, []);
 
   const option = {
     dataset: [
       {
         dimensions: ['name', 'totalNum'],
-        source: [
-          ['接口1', 41],
-          ['接口2', 20],
-          ['接口3', 52],
-          ['接口4', 37],
-          ['接口5', 25],
-          ['接口6', 19],
-          ['接口7', 71],
-          ['接口8', 36],
-          ['接口9', 67],
-        ],
+        source: mapStatisticsData2Source,
       },
       {
         transform: {

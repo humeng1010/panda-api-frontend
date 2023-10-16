@@ -64,6 +64,16 @@ export async function getCurrentUserInterfaceInfoLeftCountUsingGET(
   );
 }
 
+/** getCurrentUserInterfaceInfoLeftCountStatistics GET /api/user_interfaceInfo/left/user */
+export async function getCurrentUserInterfaceInfoLeftCountStatisticsUsingGET(options?: {
+  [key: string]: any;
+}) {
+  return request<API.BaseResponseListUserInterfaceInvokeInfo>('/api/user_interfaceInfo/left/user', {
+    method: 'GET',
+    ...(options || {}),
+  });
+}
+
 /** updateUserInterfaceInfo POST /api/user_interfaceInfo/update */
 export async function updateUserInterfaceInfoUsingPOST(
   body: API.UserInterfaceInfoUpdateRequest,
