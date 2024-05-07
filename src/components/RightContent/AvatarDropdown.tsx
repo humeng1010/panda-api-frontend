@@ -76,10 +76,10 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ children }) =
         });
       }
       if (key === 'aksk') {
-        history.push('/secret');
+        history.push('/account/secret');
       }
       if (key === 'me') {
-        history.push('/me');
+        history.push('/account/accountcenter');
       }
     },
     [setInitialState],
